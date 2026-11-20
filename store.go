@@ -33,7 +33,7 @@ func joinerKey(p byte, id ID, joiner ed25519.PublicKey) []byte {
 }
 
 // recordVersion is the version of an invite record with the device flag; an invite that is no device invite is written as
-// version 0, so a store without device invites stays readable by older versions.
+// version 0.
 const recordVersion = 1
 
 // record is the stored state of one invite; times are Unix nanoseconds, 0 for none.

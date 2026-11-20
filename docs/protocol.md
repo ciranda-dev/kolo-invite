@@ -68,8 +68,7 @@ On the backend (keys, then values, all kolo-codec):
 
 Times are Unix nanoseconds, 0 for none; an expired invite stores its expiry
 as its end. The invite record of a link-a-device invite is version 1 and ends with the
-`device` flag; every other invite record is version 0, without it, so a store
-with no device invite stays readable by older versions. A version 1 record is a device record: one without the flag is not read. A device invite is
+`device` flag; every other invite record is version 0, without it. A version 1 record is a device record: one without the flag is not read. A device invite is
 manual and single use. There is no JSON form.
 
 ## Link a device

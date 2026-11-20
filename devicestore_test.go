@@ -41,9 +41,9 @@ func TestRecordDeviceFlag(t *testing.T) {
 			t.Errorf("%s: decoded", name)
 		}
 	}
-	// Only a device invite is written as version 1: any other record stays readable by older versions.
+	// Only a device invite is written as version 1: any other record is written as version 0.
 	if b := plain.encode(); b[0] != version || !bytes.Equal(b, recordV0(plain)) {
-		t.Fatalf("a plain record starts with version %d or differs from the old layout", b[0])
+		t.Fatalf("a plain record starts with version %d or differs from the version 0 layout", b[0])
 	}
 	if b := dev.encode(); b[0] != recordVersion {
 		t.Fatalf("a device record starts with version %d", b[0])
