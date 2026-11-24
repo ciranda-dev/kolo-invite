@@ -4,12 +4,12 @@ go 1.26.0
 
 require (
 	github.com/ciranda-dev/kolo-codec v0.1.0
-	github.com/ciranda-dev/kolo-dht v0.1.0
+	github.com/ciranda-dev/kolo-dht v0.1.1
 	github.com/ciranda-dev/kolo-id v0.1.0
-	github.com/ciranda-dev/kolo-secure v0.1.0
+	github.com/ciranda-dev/kolo-secure v0.1.1
 	github.com/ciranda-dev/kolo-store v0.1.0
-	github.com/ciranda-dev/kolo-swarm v0.1.0
-	github.com/ciranda-dev/kolo-transport v0.1.0
+	github.com/ciranda-dev/kolo-swarm v0.1.1
+	github.com/ciranda-dev/kolo-transport v0.1.1
 )
 
 require (
@@ -19,7 +19,7 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/ciranda-dev/kolo-log v0.1.0 // indirect
-	github.com/ciranda-dev/kolo-relay v0.1.0 // indirect
+	github.com/ciranda-dev/kolo-relay v0.1.1 // indirect
 	github.com/cockroachdb/crlib v0.0.0-20241112164430-1264a2edc35b // indirect
 	github.com/cockroachdb/errors v1.11.3 // indirect
 	github.com/cockroachdb/logtags v0.0.0-20230118201751-21c54148d20b // indirect
