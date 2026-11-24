@@ -30,8 +30,8 @@ type Peer interface {
 
 // Announce keeps sw joined, announce only, to the topics of the live invites, oldest first, until ctx ends or the
 // Inviter is closed, then leaves them. It never reads sw's events. sw must be opened with the Inviter's identity.
-// A topic sw cannot join (MaxTopics, a network error) is tried again with backoff from 1s to 1 minute. One Announce
-// runs at a time; another returns ErrBusy.
+// A topic sw cannot join (a MaxTopics cap set on sw, a network error) is tried again with backoff from 1s to 1
+// minute. One Announce runs at a time; another returns ErrBusy.
 func (in *Inviter) Announce(ctx context.Context, sw *koloswarm.Swarm) error {
 	if sw == nil || !sw.PublicKey().Equal(in.pub) {
 		return fmt.Errorf("%w: nil swarm or a swarm of another identity", ErrInvalidArgument)

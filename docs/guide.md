@@ -61,8 +61,9 @@ Inviter:
   (`ErrClosed`), then leaves them. It never reads `sw`'s events, so the
   application keeps its own loop. `sw` must be opened with the inviter's
   identity. One Announce runs at a time; another is `ErrBusy`. Announce
-  takes every free topic of the swarm for invites, oldest first, so join
-  the application's own topics before starting it, or size kolo-swarm's
+  joins a topic for every live invite, oldest first. If the swarm sets
+  kolo-swarm's `MaxTopics` (no cap by default), Announce takes every free
+  topic, so join the application's own topics before starting it, or size
   `MaxTopics` for both (see [limits.md](limits.md)).
 - `ServePeer(ctx, p)` answers the invite requests of one connected peer
   until its connection ends (nil), `ctx` ends (its error) or the Inviter is

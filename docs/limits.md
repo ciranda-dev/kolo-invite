@@ -54,17 +54,20 @@ lock, before the answer is sent, so two requests can never take the last
 use. Requests are rate limited before they reach the lock, so throughput is
 bounded by the disk's sync latency, not by peers.
 
-`Announce` joins at most the swarm's `MaxTopics` topics (kolo-swarm default
-16, at most 32) together with the application's own. Invites take the free
-topics oldest first; later ones wait for a free topic, retried with backoff
-from 1s to 1 minute, and `Stats.Announced` shows how many are announced. An
-invite counted in `Stats.Active` but not announced cannot be found by
-joiners (only reached on a connection they already have). Since Announce
-takes every free topic, an application `Join` after it can fail with
-kolo-swarm's MaxTopics error: join the application's topics first, or set
-`MaxTopics` to the application's topics plus the invites it keeps live.
-Old invites that never expire and are never used keep their topics, and
-newer invites wait behind them: give invites a `TTL`, or `Revoke` the
+`Announce` joins the topic of every live invite, oldest first, together
+with the application's own. kolo-swarm has no topic cap by default
+(`MaxTopics` 0), so every live invite is announced. If the application sets
+`MaxTopics`, a `Join` past it fails at once with `ErrInvalidArgument`;
+Announce does not wait inside `Join` but tries that topic again with
+backoff from 1s to 1 minute, and a topic that fails for another reason (a
+network error) is retried the same way. `Stats.Announced` shows how many
+are announced. An invite counted in `Stats.Active` but not announced cannot
+be found by joiners (only reached on a connection they already have). With a
+`MaxTopics` cap, Announce takes every free topic, so an application `Join`
+after it can fail with that error: join the application's topics first, or
+set `MaxTopics` to the application's topics plus the invites it keeps live.
+Old invites that never expire and are never used keep their topics, and with
+a cap newer invites wait behind them: give invites a `TTL`, or `Revoke` the
 ones no longer needed. A joiner's swarm looks a
 topic up once when it joins it and then every `LookupInterval` (kolo-swarm
 default 10 minutes) plus up to a fifth of it at random, so a joiner that
